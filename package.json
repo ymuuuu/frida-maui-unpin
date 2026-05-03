@@ -1,0 +1,19 @@
+{
+  "name": "maui-unpin",
+  "version": "0.1.0",
+  "description": "A Frida script to bypass Mono certificate pinning implementations on .NET MAUI / unified-BCL targets. Forked from GoSecure/frida-xamarin-unpin.",
+  "main": "src/main.js",
+  "scripts": {
+    "build": "frida-compile src/main.js -o dist/maui-unpin.js"
+  },
+  "author": [
+    "Alexandre Beaulieu <abeaulieu@gosecure.net>"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "frida-compile": "9.1.0",
+    "frida-ex-nativefunction": "^0.1.2",
+    "frida-mono-api": "file:../frida-mono-api",
+    "frida-mono-api-maui": "file:../frida-mono-api-maui"
+  }
+}
