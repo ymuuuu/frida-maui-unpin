@@ -110,7 +110,6 @@ cd ../frida-maui-unpin && npm i && npm run build   # produces dist/maui-unpin.js
 - [@freehuntx](https://github.com/freehuntx) — original `frida-mono-api` and the Xamarin bypass concept.
 - [GoSecure](https://github.com/GoSecure) — maintained `frida-xamarin-unpin` and the `extra` branch of `frida-mono-api`.
 - Alexandre "alxbl" Beaulieu (`abeaulieu@gosecure.net`) — original author of `frida-xamarin-unpin`.
-- This fork — [@ymuuuu](https://github.com/ymuuuu): Frida 17 patch, MAUI/unified-BCL support, generic Stage 3 delegate introspection, `SocketsHttpHandler` path, `DelegatingHandler` unwrapping, AOT compatibility, DEBUG flag.
 
 ---
 
