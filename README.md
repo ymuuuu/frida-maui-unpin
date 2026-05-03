@@ -48,7 +48,7 @@ cd frida-maui-unpin
 npm i && npm run build
 
 # 2. Launch the app, wait for it to load, then attach
-frida -U -p $(adb shell "pidof -s com.test.sample.maui") -l ./dist/maui-unpin.js
+frida -U -p $(adb shell "pidof -s test.sample.aot") -l ./dist/maui-unpin.js
 
 # 3. Trigger an HTTPS request in the app
 ```
