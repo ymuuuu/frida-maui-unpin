@@ -3,3 +3,4 @@ bin/
 obj/
 *.dll
 *.so
+frida-maui-unpin.sln
