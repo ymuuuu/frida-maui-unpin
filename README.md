@@ -81,8 +81,6 @@ Subsequent requests skip the Stage 3 hook installation (deduplicated by `_hooked
 |---|---|---|
 | `MAUI Sample Apk/test.sample.jit.apk` | JIT (`RunAOTCompilation=false`) |  Verified |
 | `MAUI Sample Apk/test.sample.aot.apk` | AOT (`RunAOTCompilation=true`) |  Verified |
-| `com.microsoft.azure` | JIT, `SocketsHttpHandler` |  Partial (managed path clean, app uses native-layer pinning) |
-| `nl.rijksoverheid.digid.pub` | JIT, mixed handlers |  Partial (managed path clean, app uses native-layer pinning) |
 
 **Sample APK source:** `MAUI Sample Apk/` contains the test app used for validation. Based on the original test APK by Alexandre "alxbl" Beaulieu (GoSecure), rebuilt for latest .NET MAUI (`net9.0-android`). Includes both JIT and AOT build configurations. The source project is in `MAUI Sample Apk/SampleApp/` — the pre-built APKs are `test.sample.jit.apk` and `test.sample.aot.apk`.
 
