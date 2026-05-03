@@ -26,17 +26,17 @@ No Java-layer hooks. Operates entirely at the Mono / managed layer. Set `const D
 
 | Feature | Status |
 |---|---|
-| JIT-mode MAUI (`RunAOTCompilation=false`) | ✅ Verified |
-| AOT-mode MAUI (`RunAOTCompilation=true`) | ✅ Verified on Android MonoVM |
-| Generic (no app names) | ✅ Stage 3 — delegate introspection |
-| `UseNativeHttpHandler=true` (default) | ✅ Supported |
-| `UseNativeHttpHandler=false` (`SocketsHttpHandler`) | ✅ Supported |
-| `DelegatingHandler` wrappers (e.g. `LifetimeTrackingHttpMessageHandler`) | ✅ Supported |
-| iOS | ❌ Not addressed |
-| Early instrumentation (`frida -f`) | ❌ Not supported (Mono modules must be loaded) |
-| Verbose debug toggle | ✅ `DEBUG` flag in `src/main.js` |
+| JIT-mode MAUI (`RunAOTCompilation=false`) |  Verified |
+| AOT-mode MAUI (`RunAOTCompilation=true`) |  Verified on Android MonoVM |
+| Generic (no app names) |  Stage 3 — delegate introspection |
+| `UseNativeHttpHandler=true` (default) |  Supported |
+| `UseNativeHttpHandler=false` (`SocketsHttpHandler`) |  Supported |
+| `DelegatingHandler` wrappers (e.g. `LifetimeTrackingHttpMessageHandler`) |  Supported |
+| iOS |  Not addressed |
+| Early instrumentation (`frida -f`) |  Not supported (Mono modules must be loaded) |
+| Verbose debug toggle |  `DEBUG` flag in `src/main.js` |
 
-**AOT note:** `mono_compile_method` on Android MonoVM AOT returns the pre-compiled native entry point. `Interceptor.attach` patches it directly — the same as JIT. This differs from iOS LLVM AOT.
+**AOT note:** `mono_compile_method` on Android MonoVM AOT returns the pre-compiled native entry point. `Interceptor.attach` patches it directly, the same as JIT. 
 
 ---
 
@@ -79,10 +79,10 @@ Subsequent requests skip the Stage 3 hook installation (deduplicated by `_hooked
 
 | APK | Config | Status |
 |---|---|---|
-| `MAUI Sample Apk/com.test.sample.maui.apk` | JIT (`RunAOTCompilation=false`) | ✅ Verified |
-| `com.test.sample.maui.aot` | AOT (`RunAOTCompilation=true`) | ✅ Verified |
-| `com.microsoft.azure` | JIT, `SocketsHttpHandler` | ⚠️ Partial (managed path clean, app uses native-layer pinning) |
-| `nl.rijksoverheid.digid.pub` | JIT, mixed handlers | ⚠️ Partial (managed path clean, app uses native-layer pinning) |
+| `MAUI Sample Apk/com.test.sample.maui.apk` | JIT (`RunAOTCompilation=false`) |  Verified |
+| `com.test.sample.maui.aot` | AOT (`RunAOTCompilation=true`) |  Verified |
+| `com.microsoft.azure` | JIT, `SocketsHttpHandler` |  Partial (managed path clean, app uses native-layer pinning) |
+| `nl.rijksoverheid.digid.pub` | JIT, mixed handlers |  Partial (managed path clean, app uses native-layer pinning) |
 
 Build your own: `MAUI Sample Apk/SampleApp/` (`net9.0-android`, `<UseMaui>true</UseMaui>`).
 
@@ -116,12 +116,4 @@ npm run build # produces dist/maui-unpin.js
 
 ---
 
-## Further reading
 
-- `docs/recap.md` — full journey from cloning upstream to Stage 3 generic bypass + AOT findings
-- `docs/timeline.md` — chronological log (Sections 1–28)
-- `docs/explaination.md` — how the original Xamarin bypass works
-- `docs/frida-script-changes.md` — MAUI `0x10` crash root cause
-- `docs/frida-17-changes.md` — Frida 17 portability changelog
-- `docs/BCL.md` — Mono BCL fork vs unified BCL
-- `docs/links.md` — bookmark index
