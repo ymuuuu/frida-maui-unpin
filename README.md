@@ -2,7 +2,7 @@
 
 Frida script to bypass certificate pinning in **.NET MAUI Android** apps running on the **unified .NET BCL** (`dotnet/runtime` MonoVM). Generic across any MAUI app — no app-specific class names required.
 
-Forked from [`frida-xamarin-unpin`](../frida-xamarin-unpin) (Frida-17–patched community fork of [`GoSecure/frida-xamarin-unpin`](https://github.com/GoSecure/frida-xamarin-unpin)).
+Forked from `frida-xamarin-unpin` (Frida-17–patched community fork of [`GoSecure/frida-xamarin-unpin`](https://github.com/GoSecure/frida-xamarin-unpin)).
 
 ---
 
@@ -90,19 +90,17 @@ Build your own: `MAUI Sample Apk/SampleApp/` (`net9.0-android`, `<UseMaui>true</
 
 ## Building
 
-Dependencies are consumed via sibling `file:` paths. Clone all three repos into the same parent directory:
+Two-repo layout. `frida-mono-api-maui` is vendored as a sibling `file:` dependency:
 
 ```
 parent/
-├── frida-mono-api/          ← ymuuuu/frida-mono-api@frida-17
-├── frida-mono-api-maui/     ← ymuuuu/frida-mono-api-maui
+├── frida-mono-api-maui/     ← ymuuuu/frida-mono-api-maui (standalone)
 └── frida-maui-unpin/        ← this repo
 ```
 
 ```bash
-cd frida-maui-unpin
-npm i        # resolves ../frida-mono-api + ../frida-mono-api-maui
-npm run build # produces dist/maui-unpin.js
+cd frida-mono-api-maui && npm i
+cd ../frida-maui-unpin && npm i && npm run build   # produces dist/maui-unpin.js
 ```
 
 ---

@@ -12,8 +12,6 @@
   "license": "MIT",
   "dependencies": {
     "frida-compile": "9.1.0",
-    "frida-ex-nativefunction": "^0.1.2",
-    "frida-mono-api": "file:../frida-mono-api",
     "frida-mono-api-maui": "file:../frida-mono-api-maui"
   }
 }

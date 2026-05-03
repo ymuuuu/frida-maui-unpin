@@ -21,8 +21,7 @@
  * @note    Validation still happens so the certificate must be valid.
  */
 
-import { MonoApiHelper, MonoApi } from 'frida-mono-api'
-import { MonoApiMauiHelper } from 'frida-mono-api-maui'
+import { MonoApi, MonoApiHelper, MonoApiMauiHelper } from 'frida-mono-api-maui'
 const mono = MonoApi.module
 
 // Toggle verbose diagnostic output in Frida console.
