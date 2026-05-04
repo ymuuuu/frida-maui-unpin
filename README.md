@@ -107,7 +107,7 @@ cd ../frida-maui-unpin && npm i && npm run build   # produces dist/maui-unpin.js
 
 - [@freehuntx](https://github.com/freehuntx) — original `frida-mono-api` and the Xamarin bypass concept.
 - [GoSecure](https://github.com/GoSecure) — maintained `frida-xamarin-unpin` and the `extra` branch of `frida-mono-api`.
-- Alexandre "alxbl" Beaulieu (`abeaulieu@gosecure.net`) — original author of `frida-xamarin-unpin`.
+- [alxbl](https://github.com/alxbl) (`abeaulieu@gosecure.net`) — original author of `frida-xamarin-unpin`.
 
 ---
 
