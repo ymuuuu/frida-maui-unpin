@@ -86,6 +86,56 @@ Subsequent requests skip the Stage 3 hook installation (deduplicated by `_hooked
 
 ---
 
+## Forcing traffic through a proxy
+
+Unpinning gets you past certificate validation, but some MAUI apps still won't
+show up in Burp/mitmproxy because they **ignore the system proxy**. This happens
+when the app builds its `SocketsHttpHandler` with a custom `_connectCallback`:
+.NET then opens its own socket and skips the proxy-aware connection pool entirely,
+so an Android/emulator proxy setting has no effect.
+
+`src/maui-proxy.js` (standalone, no bundler / no `require`) fixes this by
+patching the handler's `_settings` on the first `HttpMessageInvoker.SendAsync`:
+
+- nulls `_connectCallback` so .NET falls back to its default, proxy-aware pool
+- sets `_useProxy = true`
+- injects a `WebProxy(host, port)` into `_proxy`
+
+On aggressively-trimmed builds the `WebProxy` class is stripped from the BCL.
+When it can't be found in any loaded assembly, the script falls back to
+`setenv()` (`ALL_PROXY` / `HTTP_PROXY` / `HTTPS_PROXY`) and leaves `_proxy = null`,
+so `SystemProxyInfo` reads the endpoint from the environment instead.
+
+### Usage
+
+Run in **spawn** mode — the connection pool is built lazily and can't be
+re-pointed after the first request:
+
+```bash
+frida -U -f <package> -l ./src/maui-proxy.js
+```
+
+Set the target at the top of the file:
+
+```js
+var PROXY_HOST = "10.100.130.182";
+var PROXY_PORT = 8080;
+```
+
+Pair it with the unpinning script (or trust the proxy CA on-device), since the
+app will now TLS with the proxy's certificate.
+
+| Scenario | Handled |
+|---|---|
+| `SocketsHttpHandler` + custom `_connectCallback` (ignores system proxy) | Yes |
+| `DelegatingHandler` wrapper chains | Yes (recursive `_innerHandler` unwrap) |
+| `WebProxy` present in BCL | Injects `WebProxy(host, port)` into `_proxy` |
+| `WebProxy` trimmed out | `setenv` + `_proxy = null` (env-var proxy) |
+| Attach mode (pool already built) | Not supported — spawn only |
+
+
+---
+
 ## Building
 
 Two-repo layout. `frida-mono-api-maui` is vendored as a sibling `file:` dependency:
